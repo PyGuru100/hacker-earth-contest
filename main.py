@@ -1,16 +1,14 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import pandas as pd
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+data = pd.read_csv('resources/dataset/train.csv')
+image_class = 'class'
+image_path = 'image_path'
+name = 'name'
+x_max = 'xmax'
+x_min = 'xmin'
+y_max = 'ymax'
+y_min = 'ymin'
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print(data[name].unique())
+print(data[image_class].unique())
