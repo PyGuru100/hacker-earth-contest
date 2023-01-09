@@ -1,17 +1,19 @@
 import os.path
-import warnings
 import pandas as pd
-import numpy as np
-from main import *
 from autogluon.multimodal import MultiModalPredictor
 import uuid
-from IPython.display import Image, display
 from sklearn.model_selection import train_test_split
 
-all_data = pd.read_csv("resources/dataset/train.csv").iloc[:100]
+all_data = pd.read_csv("resources/dataset/train.csv")
 train_data, test_data = train_test_split(all_data)
 
-train_data: pd.DataFrame
+image_class = 'class'
+image_path = 'image_path'
+name = 'name'
+x_max = 'xmax'
+x_min = 'xmin'
+y_max = 'ymax'
+y_min = 'ymin'
 
 
 def alter_data_for_autogluon(_data):
@@ -25,7 +27,6 @@ def alter_data_for_autogluon(_data):
 
 alter_data_for_autogluon(train_data)
 alter_data_for_autogluon(test_data)
-
 
 model_path = f"./tmp/{uuid.uuid4().hex}-autogluon-classifier"
 predictor = MultiModalPredictor(label="label", path=model_path)
