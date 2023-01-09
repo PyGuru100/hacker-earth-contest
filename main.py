@@ -10,5 +10,6 @@ x_min = 'xmin'
 y_max = 'ymax'
 y_min = 'ymin'
 
-print(data[name].unique())
-print(data[image_class].unique())
+if __name__ == '__main__':
+    print(data[name].unique())
+    print(data[image_class].unique())
