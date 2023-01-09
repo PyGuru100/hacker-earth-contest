@@ -8,7 +8,7 @@ import uuid
 from IPython.display import Image, display
 from sklearn.model_selection import train_test_split
 
-all_data = pd.read_csv("resources/dataset/train.csv")
+all_data = pd.read_csv("resources/dataset/train.csv").iloc[:100]
 train_data, test_data = train_test_split(all_data)
 
 train_data: pd.DataFrame
@@ -31,7 +31,7 @@ model_path = f"./tmp/{uuid.uuid4().hex}-autogluon-classifier"
 predictor = MultiModalPredictor(label="label", path=model_path)
 predictor.fit(
     train_data=train_data,
-    time_limit=30,
+    time_limit=45,
 )  # you can trust the default config, e.g., we use a `swin_base_patch4_window7_224` model
 
 scores = predictor.evaluate(test_data, metrics=["accuracy"])
