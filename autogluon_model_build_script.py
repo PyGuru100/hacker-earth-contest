@@ -4,8 +4,12 @@ from autogluon.multimodal import MultiModalPredictor
 import uuid
 from sklearn.model_selection import train_test_split
 
-all_data = pd.read_csv("resources/dataset/train.csv")
-train_data, test_data = train_test_split(all_data)
+all_data = pd.read_csv("resources/dataset/train.csv")[:100]
+train_data, test_data = train_test_split(all_data, random_state=1)
+
+assert (set(test_data['name'].unique())).issubset(set(train_data['name'].unique()))
+
+exit(1)
 
 image_class = 'class'
 image_path = 'image_path'
