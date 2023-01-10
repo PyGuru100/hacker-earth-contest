@@ -10,6 +10,6 @@ alter_data_for_autogluon(train_data)
 alter_data_for_autogluon(test_data)
 
 predictor = MultiModalPredictor.load('resources/models/latest_model/content/tmp/1673328230-autogluon-classifier')
-image_index = 350
+image_index = 405
 print(test_data.iloc[image_index])
-print(predictor.predict(test_data.iloc[image_index: image_index + 1]))
+print(predictor.evaluate(test_data))
