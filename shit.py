@@ -1,6 +1,9 @@
 import os.path
 
 import cv2
+import __main__
+
+__main__.cv2 = cv2
 
 
 def plot_one_box(x, img, color=None, label=None, line_thickness=None, Inverted=False):
@@ -32,6 +35,8 @@ for line in Lines:
         continue
     file_id_path = line.split(',')[1]
     # open image in cv2
+    if file_id_path != '53d3797457a0d2e3afe146e2f797e77e.jpg':
+        continue
     img = cv2.imread(os.path.join(os.path.dirname(__file__), f"resources/dataset/images/{file_id_path}"))
     h, w, c = img.shape
     cat = line.split(',')[2]
@@ -44,7 +49,8 @@ for line in Lines:
     # save the image
     # you might need to create the folder "drawn" first!
 
+    cv2.imshow('image window', img)
+    cv2.waitKey(0)
     cv2.imwrite(os.path.join(os.path.dirname(__file__), f"resources/drawn/images/{file_id_path}"), img)
     print("Line {}: {}".format(count, line.strip()))
     count += 1
-    exit(1)

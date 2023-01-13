@@ -9,5 +9,6 @@ train_data, test_data = load_data()
 alter_data_for_autogluon(train_data)
 alter_data_for_autogluon(test_data)
 
-predictor = MultiModalPredictor.load('resources/models/latest_model/content/tmp/1673328230-autogluon-classifier')
-print(predictor.evaluate(test_data))
+if __name__ == '__main__':
+    predictor = MultiModalPredictor.load('resources/models/latest_model/content/tmp/1673328230-autogluon-classifier')
+    print(predictor.evaluate(test_data))
