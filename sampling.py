@@ -2,8 +2,8 @@ import pandas as pd
 from PIL import Image
 import imgaug.augmenters as iaa
 import imgaug as ia
-import numpy as np
 from imgaug.augmentables.bbs import BoundingBox, BoundingBoxesOnImage
+import numpy as np
 
 CLASS = 'name'
 
