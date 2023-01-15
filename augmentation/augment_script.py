@@ -43,4 +43,6 @@ for name in data['name'].unique():
                 "ymax": bbs_aug[0].y2
             }], ignore_index=True)
             Image.fromarray(image_aug).save(f'./augmented_images/{image_path}')
+            augmented_dataset: pd.DataFrame
+            augmented_dataset.to_csv("augmented_dataset.csv")
 
