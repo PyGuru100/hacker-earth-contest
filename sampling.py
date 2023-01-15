@@ -1,7 +1,9 @@
 import pandas as pd
 from PIL import Image
 import imgaug.augmenters as iaa
+import imgaug as ia
 import numpy as np
+from imgaug.augmentables.bbs import BoundingBox, BoundingBoxesOnImage
 
 CLASS = 'name'
 
@@ -28,12 +30,24 @@ def down_sample():
 
 
 def augment():
-    base_image = Image.open('resources/dataset/images/0a1ea4614a9df912eeb8d1b40bffee74.jpg')
-    noise = iaa.AdditiveGaussianNoise(10, 40)
-    iaa.Sequential([])
-    input_noise = noise.augment_image(np.array(base_image))
-    result_image = Image.fromarray(input_noise)
-    result_image.save('new.jpg')
+    image = ia.quokka(size=(512, 512))
+    bbs = BoundingBoxesOnImage([
+        BoundingBox(x1=65, y1=100, x2=200, y2=150),
+        BoundingBox(x1=150, y1=80, x2=200, y2=130)
+    ], shape=image.shape)
+    seq = iaa.Sequential([
+        iaa.Multiply((1.2, 1.5)),
+        iaa.HorizontalFlip(),
+        iaa.GaussianBlur(),
+        iaa.VerticalFlip(),  # change brightness, doesn't affect BBs
+        iaa.Affine(
+            translate_px={"x": 40, "y": 60},
+            scale=(0.5, 0.7)
+        )])
+    image_aug, bbs_aug = seq(image=image, bounding_boxes=bbs)
+
+    Image.fromarray(image).save("pls.png")
+    Image.fromarray(image_aug).save("pls_pls.png")
 
 
 augment()
